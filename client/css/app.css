@@ -1,0 +1,13 @@
+.top-header {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 100px;
+}
+
+#house {
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 800px;
+  height: 600px;
+  margin-top: 100px;
+}
