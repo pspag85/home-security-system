@@ -12,4 +12,4 @@ https://webpack.js.org/guides/hot-module-replacement
 ## Setup
 
 * `npm install`
-* `npm start`
+* `npm start`# home-security-system
