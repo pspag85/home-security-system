@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Doorknob = props => {
-  console.log(props)
   return (
     <div id='Doorknob'>
       <button onClick={props.handleClick}>

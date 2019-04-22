@@ -19,7 +19,7 @@ class Door extends Component {
     return (
       <div className='door'>
         <h3>{openState}</h3>
-        <Doorknob handleClick={this.handleClick} />
+        <Doorknob handleClick={handleClick} />
       </div>
     )  
   }
