@@ -8,14 +8,21 @@ class Door extends Component {
   }
 
   handleClick = () => {
+    const {passcode} = this.props
     const {unlocked, open} = this.state
     if(unlocked) {
       this.setState({
         open: !open
       })      
     } else {
-      const code = prompt('Door is locked. Please enter the passcode')
-      console.log('code:  ', code)
+      const input = prompt('Door is locked. Please enter the passcode')
+      console.log(input, passcode)
+      if(input === passcode) {
+        this.setState({
+          unlocked: true
+        })
+        //display lock button and green bg
+      }
     }
   }
 
