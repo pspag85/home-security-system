@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Doorknob from './doorknob'
+import Lock from './lock'
 
 class Door extends Component {
   state = {
@@ -7,36 +8,62 @@ class Door extends Component {
     open: false
   }
 
-  handleClick = () => {
+  unlockDoor = () => {
     const {passcode} = this.props
-    const {unlocked, open} = this.state
-    if(unlocked) {
+    const input = prompt('Please enter the passcode')
+    if(input === passcode) {
       this.setState({
-        open: !open
-      })      
-    } else {
-      const input = prompt('Door is locked. Please enter the passcode')
-      console.log(input, passcode)
-      if(input === passcode) {
-        this.setState({
-          unlocked: true
-        })
-        //display lock button and green bg
-      }
+        unlocked: true
+      })
     }
   }
 
+  lockDoor = () => {
+    this.setState({
+      unlocked: false
+    })
+  }
+
+  openDoor = () => {
+    this.setState({
+      open: true
+    }) 
+  }
+
+  closeDoor = () => {
+    this.setState({
+      open: false
+    })   
+  }
+
   render() {
-    const {handleClick} = this
-    const openState = this.state.open ? 'OPEN' : 'CLOSED'
+    const {lockDoor, unlockDoor, openDoor, closeDoor, handleClick} = this
+    const {unlocked, open} = this.state
     const {type} = this.props
-    return (
-      <div className='door'>
+    const lockState = unlocked ? 'Lock' : 'Unlock'
+    const openState = open ? 'OPEN' : 'CLOSED'
+
+    return open ? (
+      <div className='unlocked door'>
         <h4>{type}</h4>
         <h4>{openState}</h4>
-        <Doorknob handleClick={handleClick} />
-      </div>
-    )  
+        <Doorknob handleClick={closeDoor} />
+      </div>      
+    ): unlocked ? (
+        <div className='unlocked door'>
+          <h4>{type}</h4>
+          <h4>{openState}</h4>
+          <Doorknob handleClick={openDoor} />
+          <Lock action={lockState} handleClick={lockDoor} />
+        </div>
+      ):(
+        <div className='locked door'>
+          <h4>{type}</h4>
+          <h4>{openState}</h4>
+          <Lock action={lockState} handleClick={unlockDoor} />
+        </div>
+      )
+    
   }
 }
 
