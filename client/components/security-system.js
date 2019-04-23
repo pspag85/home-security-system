@@ -20,7 +20,7 @@ class SecuritySystem extends Component {
     return (
       <div id='system-system'>
         <div id='security-system-container'>
-          <h3 className='top-header'>Security System</h3>
+          <h3 >Security System</h3>
           <button onClick={handleClick}>
             Generate Homeowner Passcode
           </button>
