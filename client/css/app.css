@@ -1,26 +1,40 @@
 .top-header {
-  margin: 100px auto;
+  margin: 40px auto;
+  text-align: center;
+}
+
+#security-passcode-container {
+  width: 1000px;
+  margin: 0 auto;
   text-align: center;
 }
 
 #house {
-  display: flex;
   width: 1000px;
   height: 750px;
-  margin: 100px auto;
-  justify-content: center;
+  margin: 50px auto;
   border: 1px solid black;
+}
+
+#house h2 {
+  width: 100%;
+  text-align: center;
+}
+
+.door-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .door {
   display: inline-block;
   height: 200px;
-  flex-basis: 20%;
+  flex-basis: 17%;
   margin: 20px;
   background-color: brown;
 }
 
-.door h3 {
+.door h4 {
   text-align: center;
   color: white;
 }

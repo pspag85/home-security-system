@@ -15,10 +15,12 @@ class Door extends Component {
 
   render() {
     const {handleClick} = this
-    let openState = this.state.open ? 'OPEN' : 'CLOSED'
+    const openState = this.state.open ? 'OPEN' : 'CLOSED'
+    const {type} = this.props
     return (
       <div className='door'>
-        <h3>{openState}</h3>
+        <h4>{type}</h4>
+        <h4>{openState}</h4>
         <Doorknob handleClick={handleClick} />
       </div>
     )  
