@@ -13,12 +13,12 @@ class SmokeDetector extends Component {
 
   render() {
     const {turnOff, triggerSprinklers} = this
-    const {smoke} = this.state
+    const {smoke} = this.props
     return smoke ? (
       <div>
         <div id='smoke-detector'>
           <h3>Smoke Detector</h3>
-          <button onClick={handleClick}>
+          <button onClick={turnOff}>
             OFF
           </button>
         </div>

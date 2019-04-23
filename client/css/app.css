@@ -1,10 +1,10 @@
 body {
   background-color: #7bba77;
+  text-align: center;
 }
 
 .top-header {
   margin: 40px auto;
-  text-align: center;
   color: white;
   text-shadow: 1px 1px 1px black;
 }
@@ -12,7 +12,6 @@ body {
 #security-system-container {
   width: 600px;
   margin: 0 auto;
-  text-align: center;
   background-color: rgba(220, 220, 220);
   border: 1px solid black;
 }
@@ -32,7 +31,6 @@ button {
 
 #house h2 {
   width: 100%;
-  text-align: center;
 }
 
 .door-wrapper {
@@ -51,7 +49,6 @@ button {
 }
 
 .door h4 {
-  text-align: center;
   color: white;
 }
 
@@ -73,7 +70,6 @@ button {
 }
 
 .window h4 {
-  text-align: center;
   color: white;
 }
 
@@ -93,4 +89,13 @@ button {
   background-color: grey;
   color: white;
   font-size: 18px;
+}
+
+#smoke-detector {
+  width: 80px;
+  height: 60px;
+  margin-top: 20%;
+  padding-bottom: 20px;
+  background-color: white;
+  border: 1px solid black;
 }
