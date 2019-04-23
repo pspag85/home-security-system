@@ -23,10 +23,6 @@ class Stove extends Component {
   }
 
   turnOff = () => {
-    this.fireRef.current.style.display = 'none'
-    this.smokeRef.current.style.display = 'none'
-    this.smokeAlertRef.current.style.display = 'none'
-    this.stoveAlertRef.current.style.display = 'none'
     this.setState({
       on: false,
       smoke: false

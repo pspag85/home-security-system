@@ -15,7 +15,8 @@ class SmokeDetector extends Component {
   turnOff = () => {
     this.props.smokeAlertRef.current.style.display = 'none'
     this.setState({
-      sprinklersRunning: false
+      sprinklersRunning: false,
+      flooding: false
     })
   }
 
@@ -28,8 +29,6 @@ class SmokeDetector extends Component {
 
   triggerFlood = () => {
     setTimeout(() => {
-      console.log('flooding')
-      // this.props.smokeAlertRef.current.style.display = 'none'
       this.floodRef.current.style.display = 'block'
       this.floodAlertRef.current.style.display = 'block'
       this.drainWater()
