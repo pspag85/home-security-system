@@ -23,7 +23,7 @@ button {
 
 #house {
   width: 1000px;
-  height: 750px;
+  height: 860px;
   margin: 50px auto;
   background-color: #efefef;
   border: 1px solid black;
@@ -98,4 +98,17 @@ button {
   padding-bottom: 20px;
   background-color: white;
   border: 1px solid black;
+}
+
+#sprinkler-alert {
+  display: none;
+}
+
+#flood {
+  display: none;
+  position: absolute;
+  top: 1000px;
+  width: 1000px;
+  height: 162px;
+  background-color: blue;
 }
