@@ -13,6 +13,7 @@ class Stove extends Component {
       smokeAlert: false,
       alarm: false
     }
+    this.ventSmoke = this.ventSmoke.bind(this)
   }
 
   turnOn = () => {
@@ -38,17 +39,25 @@ class Stove extends Component {
   }
 
   triggerSmoke = () => {
-    setTimeout(() => {
+    let updateState = () => {
       this.setState({
         smoke: true,
-        smokeAlert: true
+        smokeAlert: false
       })
       this.triggerAlarm()
-    }, 3000)
+    }
+    if(this.state.fire) {
+      this.smokeInterval = setInterval(updateState, 3000)
+    } else {
+      this.setState({
+        smoke: false,
+        smokeAlert: false
+      })
+    }
   }
 
   startFire = () => {
-    setTimeout(() => {
+    this.fireInterval = setInterval(() => {
       this.setState({
         stoveSwitch: false,
         stoveAlert: false
@@ -66,12 +75,28 @@ class Stove extends Component {
     }, 3000)
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.state.on) this.startFire()
+  }
+
+  ventSmoke() {
+    console.log('venting', this.setState)
+    this.setState({
+      smoke: false
+    }, () => console.log(this.state))
+  }
+
+  componentWillUnmount() {
+    const {smokeInterval, fireInterval} = this
+    clearInterval(smokeInterval)
+    clearInterval(fireInterval)
+  }
+
   render() {
-    const {turnOn, turnOff, startFire} = this
+    const {turnOn, turnOff, startFire, ventSmoke} = this
     const {on, stoveSwitch, stoveAlert, fire, smoke, smokeAlert, alarm} = this.state
     const stoveState = on ? 'TURN OFF' : 'TURN ON'
     const handleClick = on ? turnOff : turnOn
-    if(on) startFire()
     return (
       <div>
         <div id='stove'>
@@ -94,7 +119,7 @@ class Stove extends Component {
             </button>
           }
         </div>
-        <SmokeDetector smoke={alarm} smokeAlert={smokeAlert} />
+        <SmokeDetector smoke={alarm} ventSmoke={ventSmoke} />
       </div>
     )
   }
