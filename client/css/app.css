@@ -6,6 +6,7 @@ body {
   margin: 40px auto;
   text-align: center;
   color: white;
+  text-shadow: 1px 1px 1px black;
 }
 
 #security-system-container {
@@ -78,4 +79,18 @@ button {
 
 .window.unlocked {
   background-color: lightblue;
+}
+
+#fire {
+  display: none;
+  background-color: orange;
+  color: white;
+  font-size: 18px;
+}
+
+#smoke {
+  display: none;
+  background-color: grey;
+  color: white;
+  font-size: 18px;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import Door from './door'
 import Window from './window'
+import Stove from './stove'
 
 const House = props => {
   const {passcode} = props
@@ -20,6 +21,7 @@ const House = props => {
         <Door type='Back Door' passcode={passcode} />
         <Window passcode={passcode} />
         <Window passcode={passcode} />
+        <Stove />
       </div>
     </div>
   )
