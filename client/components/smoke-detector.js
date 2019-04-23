@@ -13,15 +13,26 @@ class SmokeDetector extends Component {
   }
 
   turnOff = () => {
+    this.props.smokeAlertRef.current.style.display = 'none'
     this.setState({
       sprinklersRunning: false
     })
   }
 
+  drainWater = () => {
+    setTimeout(() => {
+      this.floodRef.current.style.display = 'none'
+      this.floodAlertRef.current.style.display = 'none'
+    }, 3000)
+  }
+
   triggerFlood = () => {
     setTimeout(() => {
+      console.log('flooding')
+      // this.props.smokeAlertRef.current.style.display = 'none'
       this.floodRef.current.style.display = 'block'
       this.floodAlertRef.current.style.display = 'block'
+      this.drainWater()
     }, 3000)
     this.setState({
       flooding: true
@@ -30,13 +41,22 @@ class SmokeDetector extends Component {
 
   triggerSprinklers = () => {
     setTimeout(() => {
+      this.props.smokeAlertRef.current.style.display = 'none'
       this.sprinklerRef.current.style.display = 'block'
       this.triggerFlood()
     }, 3000)
   }
 
+  turnOffSprinklers = () => {
+    this.sprinklerRef.current.style.display = 'none'
+    this.setState({
+      sprinklersRunning: false,
+      flooding: false
+    })
+  }
+
   render() {
-    const {turnOff, triggerSprinklers, sprinklerRef, floodRef, floodAlertRef} = this
+    const {turnOff, triggerSprinklers, turnOffSprinklers, sprinklerRef, floodRef, floodAlertRef} = this
     const {smoke} = this.props
     if(smoke) triggerSprinklers()
     return smoke ? (
@@ -44,10 +64,11 @@ class SmokeDetector extends Component {
         <div id='sprinkler-alert'
           ref={sprinklerRef}>
           Fire sprinklers running. Turn off in 3 seconds to prevent flooding!
+          <button onClick={turnOffSprinklers}>Turn Off</button>
         </div>
         <div id='flood-alert'
           ref={floodAlertRef}>
-          Flood system activated. Please wait 3 seconds for water to drain
+          Flood system activated. Wait 3 seconds for water to drain.
         </div>
         <div id='smoke-detector'>
           <h3>Smoke Detector</h3>

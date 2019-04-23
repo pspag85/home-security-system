@@ -77,6 +77,15 @@ button {
   background-color: lightblue;
 }
 
+#stove-alert {
+  display: none;
+  text-align: center;
+  position: absolute;
+  left: 300px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 #fire {
   display: none;
   background-color: orange;
@@ -89,6 +98,15 @@ button {
   background-color: grey;
   color: white;
   font-size: 18px;
+}
+
+#smoke-alert {
+  display: none;
+  text-align: center;
+  position: absolute;
+  left: 300px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #smoke-detector {
