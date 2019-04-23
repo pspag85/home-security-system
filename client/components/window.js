@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
-import Doorknob from './doorknob'
 import Lock from './lock'
 
-class Door extends Component {
+class Window extends Component {
   state = {
     unlocked: false,
     open: false
   }
 
-  unlockDoor = () => {
+  unlockWindow = () => {
     const {passcode} = this.props
     const input = prompt('Please enter the passcode')
     if(input === passcode) {
@@ -18,53 +17,57 @@ class Door extends Component {
     }
   }
 
-  lockDoor = () => {
+  lockWindow = () => {
     this.setState({
       unlocked: false
     })
   }
 
-  openDoor = () => {
+  openWindow = () => {
     this.setState({
       open: true
     }) 
   }
 
-  closeDoor = () => {
+  closeWindow = () => {
     this.setState({
       open: false
     })   
   }
 
   render() {
-    const {lockDoor, unlockDoor, openDoor, closeDoor} = this
+    const {lockWindow, unlockWindow, openWindow, closeWindow} = this
     const {unlocked, open} = this.state
     const {type} = this.props
     const lockState = unlocked ? 'Lock' : 'Unlock'
     const openState = open ? 'OPEN' : 'CLOSED'
 
     return open ? (
-      <div className='unlocked door'>
+      <div className='unlocked window'>
         <h4>{type}</h4>
         <h4>{openState}</h4>
-        <Doorknob handleClick={closeDoor} />
+        <button onClick={closeWindow}>
+          Close
+        </button>
       </div>      
     ): unlocked ? (
-        <div className='unlocked door'>
+        <div className='unlocked window'>
           <h4>{type}</h4>
           <h4>{openState}</h4>
-          <Doorknob handleClick={openDoor} />
-          <Lock action={lockState} handleClick={lockDoor} />
+          <button onClick={openWindow}>
+            Open
+          </button>
+          <Lock action={lockState} handleClick={lockWindow} />
         </div>
       ):(
-        <div className='locked door'>
-          <h4>{type}</h4>
+        <div className='locked window'>
+          <h4>Window</h4>
           <h4>{openState}</h4>
-          <Lock action={lockState} handleClick={unlockDoor} />
+          <Lock action={lockState} handleClick={unlockWindow} />
         </div>
       )
     
   }
 }
 
-export default Door
+export default Window

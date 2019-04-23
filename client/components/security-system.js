@@ -18,9 +18,9 @@ class SecuritySystem extends Component {
     const {handleClick} = this
     let {passcode} = this.state
     return (
-      <div id='system-wrapper'>
-        <div id='security-passcode-container'>
-          <h3>Security Passcode</h3>
+      <div id='system-system'>
+        <div id='security-system-container'>
+          <h3 className='top-header'>Security System</h3>
           <button onClick={handleClick}>
             Generate Homeowner Passcode
           </button>

@@ -3,10 +3,14 @@
   text-align: center;
 }
 
-#security-passcode-container {
+#security-system-container {
   width: 1000px;
   margin: 0 auto;
   text-align: center;
+}
+
+button {
+  font-size: 14px;
 }
 
 #house {
@@ -23,13 +27,15 @@
 
 .door-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .door {
-  display: inline-block;
+  width: 100px;
   height: 200px;
-  flex-basis: 17%;
+  flex-wrap: wrap;
   margin: 20px;
   background-color: brown;
 }
@@ -39,6 +45,28 @@
   color: white;
 }
 
-.unlocked {
+.door.unlocked {
   background-color: green;
+}
+
+.window-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.window {
+  width: 140px;
+  height: 100px;
+  flex-wrap: wrap;
+  margin: 20px;
+  background-color: darkblue;
+}
+
+.window h4 {
+  text-align: center;
+  color: white;
+}
+
+.window.unlocked {
+  background-color: lightblue;
 }
