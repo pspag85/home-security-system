@@ -9,6 +9,7 @@ class SmokeDetector extends Component {
     }
     this.sprinklerRef = React.createRef()
     this.floodRef = React.createRef()
+    this.floodAlertRef = React.createRef()
   }
 
   turnOff = () => {
@@ -18,7 +19,10 @@ class SmokeDetector extends Component {
   }
 
   triggerFlood = () => {
-    this.floodRef.current.style.display = 'block'
+    setTimeout(() => {
+      this.floodRef.current.style.display = 'block'
+      this.floodAlertRef.current.style.display = 'block'
+    }, 3000)
     this.setState({
       flooding: true
     })
@@ -32,7 +36,7 @@ class SmokeDetector extends Component {
   }
 
   render() {
-    const {turnOff, triggerSprinklers, sprinklerRef, floodRef} = this
+    const {turnOff, triggerSprinklers, sprinklerRef, floodRef, floodAlertRef} = this
     const {smoke} = this.props
     if(smoke) triggerSprinklers()
     return smoke ? (
@@ -40,6 +44,10 @@ class SmokeDetector extends Component {
         <div id='sprinkler-alert'
           ref={sprinklerRef}>
           Fire sprinklers running. Turn off in 3 seconds to prevent flooding!
+        </div>
+        <div id='flood-alert'
+          ref={floodAlertRef}>
+          Flood system activated. Please wait 3 seconds for water to drain
         </div>
         <div id='smoke-detector'>
           <h3>Smoke Detector</h3>

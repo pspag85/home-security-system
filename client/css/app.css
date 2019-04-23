@@ -102,13 +102,30 @@ button {
 
 #sprinkler-alert {
   display: none;
+  text-align: center;
+  position: absolute;
+  left: 300px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#flood-alert {
+  display: none;
+  text-align: center;
+  position: absolute;
+  top: 980px;
+  left: 300px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  z-index: 1;
 }
 
 #flood {
   display: none;
   position: absolute;
-  top: 1000px;
+  top: 970px;
   width: 1000px;
-  height: 162px;
+  height: 192px;
   background-color: blue;
 }
