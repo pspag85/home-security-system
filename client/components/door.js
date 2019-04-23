@@ -3,14 +3,20 @@ import Doorknob from './doorknob'
 
 class Door extends Component {
   state = {
+    unlocked: false,
     open: false
   }
 
   handleClick = () => {
-    const {open} = this.state
-    this.setState({
-      open: !open
-    })
+    const {unlocked, open} = this.state
+    if(unlocked) {
+      this.setState({
+        open: !open
+      })      
+    } else {
+      const code = prompt('Door is locked. Please enter the passcode')
+      console.log('code:  ', code)
+    }
   }
 
   render() {
