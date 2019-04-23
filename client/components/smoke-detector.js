@@ -5,15 +5,15 @@ class SmokeDetector extends Component {
     super(props)
     this.state = {
       sprinklersRunning: false,
-      flooding: false
+      sprinklerAlert: false,
+      flood: false,
+      flooding: false,
+      floodMessage: false
     }
-    this.sprinklerRef = React.createRef()
-    this.floodRef = React.createRef()
-    this.floodAlertRef = React.createRef()
   }
 
   turnOff = () => {
-    this.props.smokeAlertRef.current.style.display = 'none'
+    // this.props.smokeAlertRef.current.style.display = 'none'
     this.setState({
       sprinklersRunning: false,
       flooding: false
@@ -22,15 +22,19 @@ class SmokeDetector extends Component {
 
   drainWater = () => {
     setTimeout(() => {
-      this.floodRef.current.style.display = 'none'
-      this.floodAlertRef.current.style.display = 'none'
+      this.setState({
+        flood: false,
+        flooding: false
+      })
     }, 3000)
   }
 
   triggerFlood = () => {
     setTimeout(() => {
-      this.floodRef.current.style.display = 'block'
-      this.floodAlertRef.current.style.display = 'block'
+      this.setState({
+        flood: true,
+        floodAlert: true
+      })
       this.drainWater()
     }, 3000)
     this.setState({
@@ -40,34 +44,37 @@ class SmokeDetector extends Component {
 
   triggerSprinklers = () => {
     setTimeout(() => {
-      this.props.smokeAlertRef.current.style.display = 'none'
-      this.sprinklerRef.current.style.display = 'block'
+      // this.props.smokeAlertRef.current.style.display = 'none'
+      this.setState({
+        sprinklerAlert: true
+      })
       this.triggerFlood()
     }, 3000)
   }
 
   turnOffSprinklers = () => {
-    this.sprinklerRef.current.style.display = 'none'
     this.setState({
+      sprinklerAlert: false,
       sprinklersRunning: false,
       flooding: false
     })
   }
 
   render() {
-    const {turnOff, triggerSprinklers, turnOffSprinklers, sprinklerRef, floodRef, floodAlertRef} = this
+    const {turnOff, triggerSprinklers, turnOffSprinklers} = this
+    const {sprinklerAlert, flood, floodAlert} = this.state
+    const sprinklerAlertMessage = sprinklerAlert ? 'Fire sprinklers running. Turn off in 3 seconds to prevent flooding!' : ''
+    const floodAlertMessage = floodAlert ? 'Flood system activated. Wait 3 seconds for water to drain.' : ''    
     const {smoke} = this.props
     if(smoke) triggerSprinklers()
     return smoke ? (
       <div>
-        <div id='sprinkler-alert'
-          ref={sprinklerRef}>
-          Fire sprinklers running. Turn off in 3 seconds to prevent flooding!
+        <div id='sprinkler-alert'>
+          {sprinklerAlertMessage}
           <button onClick={turnOffSprinklers}>Turn Off</button>
         </div>
-        <div id='flood-alert'
-          ref={floodAlertRef}>
-          Flood system activated. Wait 3 seconds for water to drain.
+        <div id='flood-alert'>
+          {floodAlertMessage}
         </div>
         <div id='smoke-detector'>
           <h3>Smoke Detector</h3>
@@ -75,7 +82,7 @@ class SmokeDetector extends Component {
             OFF
           </button>
         </div>
-      <div id='flood' ref={floodRef}></div>
+        {flood ? <div id='flood'></div> : <div></div>}
       </div>
     ):(
       <div>
