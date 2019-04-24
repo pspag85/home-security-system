@@ -6,83 +6,104 @@ class Stove extends Component {
     super(props)
     this.state = {
       on: false,
-      smoke: false
+      stoveSwitch: true,
+      stoveAlert: false,
+      fire: false,
+      smoke: false,
+      smokeAlert: false,
+      alarm: false
     }
-    this.stoveRef = React.createRef()
-    this.stoveAlertRef = React.createRef()
-    this.fireRef = React.createRef()
-    this.smokeRef = React.createRef()
-    this.smokeAlertRef = React.createRef()
   }
 
   turnOn = () => {
-    this.stoveAlertRef.current.style.display = 'block'
     this.setState({
-      on: true
+      on: true,
+      stoveAlert: true
     })
   }
 
   turnOff = () => {
     this.setState({
       on: false,
-      smoke: false
+      alarm: false
     })
   }
 
   triggerAlarm = () => {
     if(this.state.on) {
       this.setState({
-        smoke: true
+        alarm: true
       })      
     }
   }
 
   triggerSmoke = () => {
-    setTimeout(() => {
-      this.smokeRef.current.style.display = 'block'
+    this.smokeInterval = setInterval(() => {
+      this.setState({
+        smoke: true,
+        smokeAlert: true
+      })
       this.triggerAlarm()
-      this.smokeAlertRef.current.style.display = 'block'
-    }, 3000)
+    }, 4000)
   }
 
   startFire = () => {
-    setTimeout(() => {
-      this.stoveAlertRef.current.style.display = 'none'
-      this.stoveRef.current.style.display = 'none'
+    this.fireInterval = setInterval(() => {
+      this.setState({
+        stoveSwitch: false,
+        stoveAlert: false
+      })
       if(this.state.on) {
-        this.fireRef.current.style.display = 'block'
+        this.setState({
+          fire: true
+        })
         this.triggerSmoke()
       } else {
-        this.stoveRef.current.style.display = 'block'
+        this.setState({
+          stoveSwitch: true
+        })
       }
     }, 3000)
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.state.on) this.startFire()
+  }
+
+  componentWillUnmount() {
+    const {smokeInterval, fireInterval} = this
+    clearInterval(smokeInterval)
+    clearInterval(fireInterval)
+  }
+
   render() {
-    const {turnOn, turnOff, startFire, stoveRef, stoveAlertRef, fireRef, smokeRef, smokeAlertRef} = this
-    const {on, smoke} = this.state
+    const {turnOn, turnOff, startFire, ventSmoke} = this
+    const {on, stoveSwitch, stoveAlert, fire, smoke, smokeAlert, alarm} = this.state
     const stoveState = on ? 'TURN OFF' : 'TURN ON'
     const handleClick = on ? turnOff : turnOn
-    if(on) startFire()
     return (
       <div>
         <div id='stove'>
           <h3>Stove</h3>
-        <div id='stove-alert'
-          ref={stoveAlertRef}>
-          Stove on. Turn off in 3 seconds to prevent a fire!
+          {!stoveAlert ? null
+          : <div id='stove-alert'>
+              Stove on. Turn off in 3 seconds to prevent a fire!
+            </div>
+          }
+          {!smokeAlert ? null
+          : <div id='smoke-alert'>
+              Fire Department ont the way. Initiating sprinkler system...
+            </div>
+          }
+          {smoke ? <div id='smoke'>Smoke</div> : <div></div>}
+          {fire ? <div id='fire'>Fire</div>   : <div></div>}
+          {!stoveSwitch ? <div></div>
+          : <button onClick={handleClick}>
+              {stoveState}
+            </button>
+          }
         </div>
-          <div id='smoke-alert'
-          ref={smokeAlertRef}>
-          Smoke detector alarming! Turn off in 3 seconds to prevent a sprinkler system from activating.
-        </div>
-          <div id='smoke' ref={smokeRef}>Smoke</div>
-          <div id='fire' ref={fireRef}>Fire</div>
-          <button ref={stoveRef} onClick={handleClick}>
-            {stoveState}
-          </button>
-        </div>
-        <SmokeDetector smoke={smoke} smokeAlertRef={smokeAlertRef} />
+        <SmokeDetector alarm={alarm} />
       </div>
     )
   }

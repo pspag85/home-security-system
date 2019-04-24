@@ -78,7 +78,6 @@ button {
 }
 
 #stove-alert {
-  display: none;
   text-align: center;
   position: absolute;
   left: 300px;
@@ -87,21 +86,18 @@ button {
 }
 
 #fire {
-  display: none;
   background-color: orange;
   color: white;
   font-size: 18px;
 }
 
 #smoke {
-  display: none;
   background-color: grey;
   color: white;
   font-size: 18px;
 }
 
 #smoke-alert {
-  display: none;
   text-align: center;
   position: absolute;
   left: 300px;
@@ -109,7 +105,7 @@ button {
   font-weight: bold;
 }
 
-#smoke-detector {
+.smoke-detector {
   width: 80px;
   height: 60px;
   margin-top: 20%;
@@ -119,7 +115,6 @@ button {
 }
 
 #sprinkler-alert {
-  display: none;
   text-align: center;
   position: absolute;
   left: 300px;
@@ -128,7 +123,6 @@ button {
 }
 
 #flood-alert {
-  display: none;
   text-align: center;
   position: absolute;
   top: 980px;
@@ -140,10 +134,16 @@ button {
 }
 
 #flood {
-  display: none;
   position: absolute;
   top: 970px;
   width: 1000px;
   height: 192px;
   background-color: blue;
+}
+
+#fire-alarm {
+  width: 15px;
+  height: 15px;
+  position: relative;
+  background-color: red;
 }
