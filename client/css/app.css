@@ -1,4 +1,4 @@
-body {
+ body {
   background-color: #7bba77;
   text-align: center;
 }
@@ -118,6 +118,7 @@ button {
   text-align: center;
   position: absolute;
   left: 300px;
+  top: 1000px;
   font-size: 20px;
   font-weight: bold;
 }
@@ -125,7 +126,7 @@ button {
 #flood-alert {
   text-align: center;
   position: absolute;
-  top: 980px;
+  top: 1100px;
   left: 300px;
   font-size: 20px;
   font-weight: bold;
@@ -135,9 +136,9 @@ button {
 
 #flood {
   position: absolute;
-  top: 970px;
+  top: 1070px;
   width: 1000px;
-  height: 192px;
+  height: 92px;
   background-color: blue;
 }
 

@@ -69,7 +69,7 @@ class SprinklerSystem extends Component {
       <div>
         {!sprinklerAlert ? null
         : <div id='sprinkler-alert'>
-            Fire sprinklers running. Turn off in 3 seconds to prevent flooding!
+            Fire sprinklers running. Initiating flood system...
           </div>
         }
         {!floodAlert ? null
