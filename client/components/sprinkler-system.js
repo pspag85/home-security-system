@@ -66,7 +66,6 @@ class SprinklerSystem extends Component {
   render() {
     const {triggerSprinklers, turnOffSprinklers} = this
     const {sprinklerAlert, flood, floodAlert} = this.state
-    const {smoke} = this.props
     return (
       <div>
         {!sprinklerAlert ? null
