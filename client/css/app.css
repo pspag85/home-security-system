@@ -140,3 +140,10 @@ button {
   height: 192px;
   background-color: blue;
 }
+
+#fire-alarm {
+  width: 15px;
+  height: 15px;
+  position: relative;
+  background-color: red;
+}

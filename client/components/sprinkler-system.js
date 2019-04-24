@@ -36,7 +36,6 @@ class SprinklerSystem extends Component {
 
   triggerSprinklers = () => {
     this.sprinklerInterval = setInterval(() => {
-      // this.props.smokeAlertRef.current.style.display = 'none'
       this.setState({
         sprinklerAlert: true
       })
@@ -53,7 +52,7 @@ class SprinklerSystem extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.smoke) this.triggerSprinklers()
+    if(this.props.alarm) this.triggerSprinklers()
   }
 
   componentWillUnmount() {

@@ -13,7 +13,6 @@ class Stove extends Component {
       smokeAlert: false,
       alarm: false
     }
-    this.ventSmoke = this.ventSmoke.bind(this)
   }
 
   turnOn = () => {
@@ -39,11 +38,13 @@ class Stove extends Component {
   }
 
   triggerSmoke = () => {
-    this.setState({
-      smoke: true,
-      smokeAlert: true
-    })
-    this.triggerAlarm()
+    this.smokeInterval = setInterval(() => {
+      this.setState({
+        smoke: true,
+        smokeAlert: true
+      })
+      this.triggerAlarm()
+    }, 4000)
   }
 
   startFire = () => {
@@ -69,14 +70,10 @@ class Stove extends Component {
     if(this.state.on) this.startFire()
   }
 
-  ventSmoke() {
-    clearInterval()
-    this.setState({
-      on: false,
-      smoke: false,
-      fire: false,
-      smokeAlert: false
-    }, () => this.setState(this.state))
+  componentWillUnmount() {
+    const {smokeInterval, fireInterval} = this
+    clearInterval(smokeInterval)
+    clearInterval(fireInterval)
   }
 
   render() {
@@ -88,16 +85,16 @@ class Stove extends Component {
       <div>
         <div id='stove'>
           <h3>Stove</h3>
-            {!stoveAlert ? null
-            : <div id='stove-alert'>
-                Stove on. Turn off in 3 seconds to prevent a fire!
-              </div>
-            }
-            {!smokeAlert ? null
-            : <div id='smoke-alert'>
-                Smoke detector alarming! Turn off in 3 seconds to prevent a sprinkler system from activating.
-              </div>
-            }
+          {!stoveAlert ? null
+          : <div id='stove-alert'>
+              Stove on. Turn off in 3 seconds to prevent a fire!
+            </div>
+          }
+          {!smokeAlert ? null
+          : <div id='smoke-alert'>
+              Fire Department ont the way. Initiating sprinkler system...
+            </div>
+          }
           {smoke ? <div id='smoke'>Smoke</div> : <div></div>}
           {fire ? <div id='fire'>Fire</div>   : <div></div>}
           {!stoveSwitch ? <div></div>
@@ -106,7 +103,7 @@ class Stove extends Component {
             </button>
           }
         </div>
-        <SmokeDetector smoke={alarm} ventSmoke={ventSmoke} />
+        <SmokeDetector alarm={alarm} />
       </div>
     )
   }
