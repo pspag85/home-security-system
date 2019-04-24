@@ -16,6 +16,8 @@ class SprinklerSystem extends Component {
   drainWater = () => {
     this.drainInterval = setInterval(() => {
       this.systemRef.current.style.display = 'none'
+      document.getElementById("smoke-alert").style.display = 'none'
+      document.getElementById("fire-alarm").style.display = 'none'
     }, 3000)
   }
 
@@ -66,7 +68,7 @@ class SprinklerSystem extends Component {
       <div ref={systemRef}>
         {!sprinklerAlert ? null
         : <div id='sprinkler-alert'>
-            Fire sprinklers running. Initiating flood system...
+            Fire sprinklers activated. Initiating flood system...
           </div>
         }
         {!floodAlert ? null

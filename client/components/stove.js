@@ -92,7 +92,7 @@ class Stove extends Component {
           }
           {!smokeAlert ? null
           : <div id='smoke-alert'>
-              Fire Department ont the way. Initiating sprinkler system...
+              Your Local Fire Department is on the way. Initiating sprinkler system...
             </div>
           }
           {smoke ? <div id='smoke'>Smoke</div> : <div></div>}
