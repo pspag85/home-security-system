@@ -39,21 +39,11 @@ class Stove extends Component {
   }
 
   triggerSmoke = () => {
-    let updateState = () => {
-      this.setState({
-        smoke: true,
-        smokeAlert: false
-      })
-      this.triggerAlarm()
-    }
-    if(this.state.fire) {
-      this.smokeInterval = setInterval(updateState, 3000)
-    } else {
-      this.setState({
-        smoke: false,
-        smokeAlert: false
-      })
-    }
+    this.setState({
+      smoke: true,
+      smokeAlert: true
+    })
+    this.triggerAlarm()
   }
 
   startFire = () => {
@@ -80,17 +70,19 @@ class Stove extends Component {
   }
 
   ventSmoke() {
-    console.log('venting', this.setState)
+    clearInterval()
     this.setState({
-      smoke: false
-    }, () => console.log(this.state))
+      on: false,
+      smoke: false,
+      fire: false,
+      smokeAlert: false
+    }, () => this.setState(this.state))
   }
 
-  componentWillUnmount() {
-    const {smokeInterval, fireInterval} = this
-    clearInterval(smokeInterval)
-    clearInterval(fireInterval)
-  }
+  // componentWillUnmount() {
+  //   const {fireInterval} = this
+  //   console.log('fire:  ', fireInterval)
+  // }
 
   render() {
     const {turnOn, turnOff, startFire, ventSmoke} = this

@@ -52,6 +52,10 @@ class SprinklerSystem extends Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.smoke) this.triggerSprinklers()
+  }
+
   componentWillUnmount() {
     const {drainInterval, floodInterval, sprinklerInterval} = this
     clearInterval(drainInterval)
@@ -63,16 +67,15 @@ class SprinklerSystem extends Component {
     const {triggerSprinklers, turnOffSprinklers} = this
     const {sprinklerAlert, flood, floodAlert} = this.state
     const {smoke} = this.props
-    if(smoke) triggerSprinklers()
     return (
       <div>
         {!sprinklerAlert ? null
-        : <div id='stove-alert'>
+        : <div id='sprinkler-alert'>
             Fire sprinklers running. Turn off in 3 seconds to prevent flooding!
           </div>
         }
         {!floodAlert ? null
-        : <div id='smoke-alert'>
+        : <div id='flood-alert'>
             Flood system activated. Wait 3 seconds for water to drain.
           </div>
         }
