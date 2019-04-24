@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
 import SprinklerSystem from './sprinkler-system'
-  const turnOff = (cb) => {
-    // this.props.smokeAlertRef.current.style.display = 'none'
+const turnOff = (cb) => {
+  // this.props.smokeAlertRef.current.style.display = 'none'
+  cb()
+}
 
-    cb()
-    // let sprinklersRunning = false
-    // let flooding = false
-  }
 const SmokeDetector = props => {
+  console.log(props)
   const {smoke} = props
   return smoke ? (
     <div>

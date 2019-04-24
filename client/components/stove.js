@@ -79,11 +79,6 @@ class Stove extends Component {
     }, () => this.setState(this.state))
   }
 
-  // componentWillUnmount() {
-  //   const {fireInterval} = this
-  //   console.log('fire:  ', fireInterval)
-  // }
-
   render() {
     const {turnOn, turnOff, startFire, ventSmoke} = this
     const {on, stoveSwitch, stoveAlert, fire, smoke, smokeAlert, alarm} = this.state
