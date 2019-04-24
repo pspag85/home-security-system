@@ -10,14 +10,12 @@ class SprinklerSystem extends Component {
       flooding: false,
       floodMessage: false
     }
+    this.systemRef = React.createRef()
   }
 
   drainWater = () => {
     this.drainInterval = setInterval(() => {
-      this.setState({
-        flood: false,
-        flooding: false
-      })
+      this.systemRef.current.style.display = 'none'
     }, 3000)
   }
 
@@ -26,8 +24,7 @@ class SprinklerSystem extends Component {
       this.setState({
         flood: true,
         floodAlert: true
-      })
-      this.drainWater()
+      }, () => this.drainWater())
     }, 3000)
     this.setState({
       flooding: true
@@ -63,10 +60,10 @@ class SprinklerSystem extends Component {
   }
 
   render() {
-    const {triggerSprinklers, turnOffSprinklers} = this
+    const {systemRef} = this
     const {sprinklerAlert, flood, floodAlert} = this.state
     return (
-      <div>
+      <div ref={systemRef}>
         {!sprinklerAlert ? null
         : <div id='sprinkler-alert'>
             Fire sprinklers running. Initiating flood system...
@@ -77,7 +74,7 @@ class SprinklerSystem extends Component {
             Flood system activated. Wait 3 seconds for water to drain.
           </div>
         }
-        {flood ? <div id='flood'></div> : <div></div>}
+        {flood ? <div id='flood'></div> : null}
       </div>
     )
   }
