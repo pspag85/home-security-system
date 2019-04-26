@@ -14,6 +14,8 @@ class SprinklerSystem extends Component {
   }
 
   drainWater = () => {
+    document.getElementById("smoke").style.display = 'none'
+    document.getElementById("fire").style.display = 'none'
     this.drainInterval = setInterval(() => {
       this.systemRef.current.style.display = 'none'
       document.getElementById("smoke-alert").style.display = 'none'
