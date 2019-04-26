@@ -1,7 +1,7 @@
 {
-  "name": "HMR-Boilerplate",
+  "name": "Home-Security-System",
   "version": "1.0.0",
-  "description": "Hot Module Replacement Boilerplate",
+  "description": "mock program for home security system",
   "main": "server/index.js",
   "scripts": {
     "start": "npm run start-server & npm run build-watch",
